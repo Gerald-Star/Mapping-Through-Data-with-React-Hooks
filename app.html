@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+
+      table {
+        display: inline-block;
+        border-collapse: collapse;
+        padding: 8px;
+        margin-top: 40px;
+        margin-left: 40px;
+        /* width: 100%; */
+      }
+
+      th {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- image placeholder -->
+
+    <a href="https://placehold.co/"
+      ><img
+        src="https://placehold.co/600x400/orange/white"
+        alt="placeholder"
+        title="placeholder"
+        target="_blank"
+    /></a>
+
+    <img src="https://placehold.co/600x400?text=Hello\nWorld" alt="" />
+
+    <br />
+    <h1>HTML TABLES</h1>
+
+    <p>Each table row is defined with a 'tr' tag</p>
+    <p>Table header is defined with a 'th' tag</p>
+    <p>Table data is defined with a 'td' tag</p>
+
+    <table border="3">
+      <tr>
+        <!--table row-->
+        <th>Company</th>
+        <!--table head-->
+        <th>Contact</th>
+        <th>Country</th>
+      </tr>
+
+      <tr>
+        <td>Marie Anders</td>
+        <td>Cosco Avenue</td>
+        <td>Germany</td>
+      </tr>
+
+      <tr>
+        <td>Alfred Jan</td>
+        <td>Stader Lousina</td>
+        <td>France</td>
+      </tr>
+
+      <tr>
+        <td>John Doe</td>
+        <td>Stader Lousina</td>
+        <td>France</td>
+      </tr>
+    </table>
+    <br />
+
+    <h2>HTML FORM ELEMENT</h2>
+
+    <p>
+      HTML Form element is the container for different types of input elements
+      such as text fields, checkboxes, radio buttons and submit buttons
+    </p>
+
+    <p>
+      The 'input element' is the most used type of the form element. Input
+      element can be displayed in so many ways with type attribute.
+    </p>
+
+    <p>Examples</p>
+
+    <ol>
+      <li>input type="text"</li>
+      <li>input type="radio"</li>
+      <li>input type="checkbox"</li>
+      <li>input type="submit"</li>
+      <li>input type="button</li>
+    </ol>
+  </body>
+
+  <form action="contact.php" method="GET" style="margin-left:40px ;">
+    <label for="email">First name:</label>
+    <input type="text" name="name" placeholder="Enter your first name" required/> 
+    <br> <br>
+    <label for="email">Last name:</label>
+    <input type="text" name="name" placeholder="Enter your first name" required/> <br>
+    <br /><br />
+    <label for="email">Email:</label> 
+    <input
+      type="email"
+      name="email"
+      id="email"
+      placeholder="Enter your email."
+      required
+    />
+    <br> <br>
+    <textarea name="message" id="textarea"  rows="10" cols="50"></textarea>
+    <br> <br>
+    <input type="submit" value="Send Message">
+  </form>
+  <br>
+
+  <h3>Contact Us</h3>
+
+  <br>
+
+
+  <h3>Block and Inline Element</h3>
+
+  <h3>What are block Elements</h3>
+</html>
