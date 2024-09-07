@@ -2,7 +2,11 @@
 // useState is a hook that allows us to use state in a functional component
 // set onChange to update the state on the input field
 
-import { useState, useEffect } from "react";
+//remove useEffect and use useQuery
+
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import fetchSearch from "./fetchSearch";
 //import Pet from "./Pet";
 import useBreedList from "./useBreedList";
 import Results from "./Results";
@@ -10,54 +14,68 @@ import Results from "./Results";
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
 const SearchParams = () => {
-  const [location, setLocation] = useState("");
+  //const [location, setLocation] = useState("");
+  const [requestParams, setRequestParams] = useState({
+    location: "",
+    animal: "",
+    breed: "",
+  });
   const [animal, setAnimal] = useState("");
-  const [breed, setBreed] = useState("");
-  const [pets, setPets] = useState([]); // Initialize pets as an empty array
+  //const [breed, setBreed] = useState("");
+  //const [pets, setPets] = useState([]); // Initialize pets as an empty array
   //const breeds = []; // Placeholder, add breed fetching logic if needed
   const [breeds] = useBreedList(animal); // Fetch breeds using custom hook
 
-  // useEffect to fetch pets
-  useEffect(() => {
-    requestPets();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Add animal, location, breed as dependencies
+  const results = useQuery(["search", requestParams], fetchSearch);
+  const pets = results?.data?.pets ?? [];
 
-  async function requestPets() {
-    const res = await fetch(
-      `http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`
-    );
-    const json = await res.json();
-    setPets(json.pets); // Update pets state with the fetched data
+  // useEffect to fetch pets is removed
+  {
+    /*
+    useEffect(() => {
+        requestPets();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []); // Add animal, location, breed as dependencies
+
+    async function requestPets() {
+        const res = await fetch(
+            `http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`
+        );
+        const json = await res.json();
+        setPets(json.pets); // Update pets state with the fetched data
+    }
+*/
   }
 
   return (
     <div className="search-params">
       <form
         onSubmit={(e) => {
-          e.preventDefault(); // Prevent form submission from refreshing the page
-          requestPets(); // Fetch pets when form is submitted
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          const obj = {
+            animal: formData.get("animal") ?? "",
+            breed: formData.get("breed") ?? "",
+            location: formData.get("location") ?? "",
+          };
+          setRequestParams(obj);
         }}
       >
         <label htmlFor="location">
           Location
-          <input
-            id="location"
-            value={location}
-            placeholder="Location"
-            onChange={(e) => setLocation(e.target.value)}
-          />
+          <input id="location" name="location" placeholder="Location" />
         </label>
 
-        {/* Animal dropdown */}
         <label htmlFor="animal">
           Animal
           <select
             id="animal"
-            value={animal}
+            name="animal"
             onChange={(e) => {
               setAnimal(e.target.value);
-              setBreed(""); // Reset breed when animal changes
+            }}
+            onBlur={(e) => {
+              setAnimal(e.target.value);
             }}
           >
             <option />
@@ -69,15 +87,9 @@ const SearchParams = () => {
           </select>
         </label>
 
-        {/* Breed dropdown */}
         <label htmlFor="breed">
           Breed
-          <select
-            disabled={!breeds.length}
-            id="breed"
-            value={breed}
-            onChange={(e) => setBreed(e.target.value)}
-          >
+          <select disabled={!breeds.length} id="breed" name="breed">
             <option />
             {breeds.map((breed) => (
               <option key={breed} value={breed}>
@@ -88,25 +100,8 @@ const SearchParams = () => {
         </label>
 
         <button>Submit</button>
-          </form>
-          
-          <Results pets={pets} />
-
-      {/* Render fetched pets *
-      {pets.length > 0 ? (
-        pets.map((pet) => (
-          <Pet
-            name={pet.name}
-            animal={pet.animal}
-            breed={pet.breed}
-            key={pet.id}
-          />
-        ))
-      ) : (
-        <p>No pets found</p> // Show message if no pets are found
-          )}
-          
-          */}
+      </form>
+      <Results pets={pets} />
     </div>
   );
 };
