@@ -1,6 +1,5 @@
 import Pet from "./Pet";
 
-
 const Results = ({ pets }) => {
   return (
     <div className="search">
@@ -24,6 +23,5 @@ const Results = ({ pets }) => {
     </div>
   );
 };
-
 
 export default Results;

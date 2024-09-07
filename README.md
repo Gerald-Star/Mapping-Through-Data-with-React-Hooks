@@ -97,3 +97,9 @@ You use state to make the render function dynamic
 // to make this dynamic we need to use hooks - useState
 // useState is a hook that allows us to use state in a functional component
 // set onChange to update the state on the input field
+
+
+### React Router
+
+- install React Router DOM
+npm i react-router-dom@6.4.1
