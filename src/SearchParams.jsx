@@ -3,8 +3,9 @@
 // set onChange to update the state on the input field
 
 import { useState, useEffect } from "react";
-import Pet from "./Pet";
+//import Pet from "./Pet";
 import useBreedList from "./useBreedList";
+import Results from "./Results";
 
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
@@ -87,9 +88,11 @@ const SearchParams = () => {
         </label>
 
         <button>Submit</button>
-      </form>
+          </form>
+          
+          <Results pets={pets} />
 
-      {/* Render fetched pets */}
+      {/* Render fetched pets *
       {pets.length > 0 ? (
         pets.map((pet) => (
           <Pet
@@ -101,7 +104,9 @@ const SearchParams = () => {
         ))
       ) : (
         <p>No pets found</p> // Show message if no pets are found
-      )}
+          )}
+          
+          */}
     </div>
   );
 };
